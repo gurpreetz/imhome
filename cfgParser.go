@@ -13,12 +13,23 @@ type Config struct {
 	SiteID       string      `json:"siteID"`
 	DeviceMac    string      `json:"deviceMAC"`
 	Coordinates  Coordinates `json:"coordinates"`
+	Email        Email       `json:"email"`
 }
 
 // Coordinates represent geographic coordinates
 type Coordinates struct {
 	Latitude  float64 `json:"latitude,string"`
 	Longitude float64 `json:"longitude,string"`
+}
+
+// Email - the email details to be used
+type Email struct {
+	From    string `json:"from"`
+	To      string `json:"to"`
+	Pwd     string `json:"pass"`
+	SMTP    string `json:"smtp"`
+	Port    int    `json:"port,string"`
+	Subject string `json:"subject"`
 }
 
 func cfgParser() (Config, error) {

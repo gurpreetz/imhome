@@ -32,6 +32,7 @@ func main() {
 					currentTime := time.Now()
 					if currentTime.After(solarData.Sunset.Local()) {
 						fmt.Printf("Do something\n")
+						sendMail(cfg.Email)
 					} else {
 						fmt.Printf("Sun is still up; Do nothing\n")
 					}
