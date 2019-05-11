@@ -13,6 +13,8 @@ Turn on the lights when I come home.
 
 * MIST API Token
 * Lat/Long for which sunset is to be calculated
+* Smart Outlet/Device with IFTTT support
+* App password in case using gmail account for emails
 
 Place these in a config file : `config.json`
 ```
@@ -23,6 +25,14 @@ Place these in a config file : `config.json`
     "coordinates" : {
         "latitude" : "37.733795",
         "longitude": "-122.446747"
-    }
+    },
+    "email" : {
+        "from" : "YOUR IFTTT email address",
+        "pass" : "",
+        "smtp" : "smtp.gmail.com",
+        "port" : "587",
+        "subject" : "#home",
+        "to" : "trigger@applet.ifttt.com"
+    }    
 }
 ```
