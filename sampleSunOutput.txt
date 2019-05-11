@@ -1,0 +1,18 @@
+/*
+Example:
+	https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&formatted=0
+	{
+		"results": {
+			"sunrise":"2017-11-24T07:05:28+00:00",
+			"sunset":"2017-11-24T17:03:40+00:00",
+			"solar_noon":"2017-11-24T12:04:34+00:00",
+			"day_length":35892,
+			"civil_twilight_begin":"2017-11-24T06:37:28+00:00",
+			"civil_twilight_end":"2017-11-24T17:31:41+00:00",
+			"nautical_twilight_begin":"2017-11-24T06:05:44+00:00",
+			"nautical_twilight_end":"2017-11-24T18:03:24+00:00",
+			"astronomical_twilight_begin":"2017-11-24T05:34:45+00:00",
+			"astronomical_twilight_end":"2017-11-24T18:34:24+00:00"
+		},
+		"status": "OK"
+	}
