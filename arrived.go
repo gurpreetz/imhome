@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+// FreshConnectUptime - time less than which a device is considered to be a new connection
+const FreshConnectUptime = 180 // seconds
+
 func main() {
 	cfg, err := cfgParser()
 	if err != nil {
@@ -12,26 +15,31 @@ func main() {
 	}
 
 	solarData, err := GetSolarData(cfg.Coordinates)
-	nextSunsetIn := time.Until(solarData.Sunset)
-	fmt.Printf("Sunset will be in %v\n", nextSunsetIn)
+	fmt.Printf("Sunset will be in %v\n", time.Until(solarData.Sunset))
 
-	ticker := time.NewTicker(1 * time.Minute)
-	defer ticker.Stop()
-	var devicePresent bool
-	devicePresent = false
-	deviceInfo, err := GetDeviceInfo(cfg)
-	if err == nil {
-		devicePresent = true
-	}
+	devTicker := time.NewTicker(1 * time.Minute)
+	defer devTicker.Stop()
+
+	sunTicker := time.NewTicker(12 * time.Hour)
+	defer sunTicker.Stop()
 	for {
 		select {
-		case <-ticker.C:
-			deviceInfo, err = GetDeviceInfo(cfg)
+		case <-devTicker.C:
+			deviceInfo, err := GetDeviceInfo(cfg)
 			if err == nil {
-				devicePresent = true
+				if deviceInfo.UpTime < FreshConnectUptime {
+					fmt.Printf("Device just connected\n")
+					currentTime := time.Now()
+					if currentTime.After(solarData.Sunset.Local()) {
+						fmt.Printf("Do something\n")
+					} else {
+						fmt.Printf("Sun is still up; Do nothing\n")
+					}
+				}
 				fmt.Printf("Found Device %s connected for %d seconds\n", deviceInfo.HostName, deviceInfo.UpTime)
 			}
-			fmt.Println(devicePresent)
+		case <-sunTicker.C:
+			solarData, err = GetSolarData(cfg.Coordinates)
 		}
 	}
 }
