@@ -1,0 +1,17 @@
+{
+    "mistAPIToken" : "",
+    "siteID" : "",
+    "deviceMAC" : "",
+    "coordinates" : {
+        "latitude" : "37.733795",
+        "longitude": "-122.446747"
+    },
+    "email" : {
+        "from" : "",
+        "pass" : "",
+        "smtp" : "smtp.gmail.com",
+        "port" : "587",
+        "subject" : "",
+        "to" : "trigger@applet.ifttt.com"
+    }
+}

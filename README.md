@@ -15,7 +15,7 @@ Turn on the lights when I come home.
 * MIST Access Point
 * Mist API Token
 * IFTTT account
-* Lat/Long for which sunset is to be calculated
+* Lat/Long for which sunset is to be calculated (I've used San Francisco in the example below)
 * Smart Outlet/Device with IFTTT support
 * App password in case using gmail account for emails
 
@@ -38,4 +38,12 @@ Place these in a config file : `config.json`
         "to" : "trigger@applet.ifttt.com"
     }    
 }
+```
+
+## Running
+
+```
+   go get https://github.com/gurpreetz/imhome
+   go install
+   imhome
 ```
