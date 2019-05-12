@@ -43,7 +43,8 @@ Place these in a config file : `config.json`
 ## Running
 
 ```
-   go get https://github.com/gurpreetz/imhome
-   go install
+   go install https://github.com/gurpreetz/imhome
    imhome
 ```
+
+Note: `config.json` need to be placed in the directory from where `imhome` will run
