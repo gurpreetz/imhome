@@ -37,7 +37,7 @@ func main() {
 						fmt.Printf("Sun is still up; Do nothing\n")
 					}
 				}
-				fmt.Printf("Found Device %s connected for %d seconds\n", deviceInfo.HostName, deviceInfo.UpTime)
+				//fmt.Printf("Found Device %s connected for %d seconds\n", deviceInfo.HostName, deviceInfo.UpTime)
 			}
 		case <-sunTicker.C:
 			solarData, err = GetSolarData(cfg.Coordinates)
