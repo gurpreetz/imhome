@@ -48,3 +48,7 @@ Place these in a config file : `config.json`
 ```
 
 Note: `config.json` need to be placed in the directory from where `imhome` will run
+
+## Today
+  - [ ] Staggered Mist API Queries (query less often when the sun is up, more frequently near and after sunset)
+  - [ ] Hysterisis - dont turn on the light if i've already been home and phone reconnects to WiFi
