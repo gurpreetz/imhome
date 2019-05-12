@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"time"
 )
@@ -58,37 +57,4 @@ func GetSolarData(coordinates Coordinates) (*SunriseSunsetResults, error) {
 	}
 
 	return &container.Results, nil
-}
-
-// AutoUpdateSunsetTime - periodically fetch the sunset time
-func AutoUpdateSunsetTime() <-chan *SunriseSunsetResults {
-	sunsetTimeCh := make(chan *SunriseSunsetResults, 1)
-	var sanFrancisco = Coordinates{
-		Latitude:  37.733795,
-		Longitude: -122.446747,
-	}
-
-	go func() {
-		for {
-			solarData, err := GetSolarData(sanFrancisco)
-			if err != nil {
-				fmt.Println("Unable to refresh sunset time", err)
-				time.Sleep(30 * time.Second)
-				continue
-			}
-			select {
-			case sunsetTimeCh <- solarData:
-				fmt.Printf("Updated sunset time to %v", solarData.Sunset)
-			default:
-				fmt.Println("Skipping publishing updated sunset time, channel full")
-			}
-			nextSunrise := solarData.Sunrise.Local().Add(24 * time.Hour)
-			untilNextSunrise := time.Until(nextSunrise)
-
-			log.Printf("Will next update sunset time in %0.2f seconds\n", untilNextSunrise.Seconds())
-			time.Sleep(untilNextSunrise)
-		}
-	}()
-
-	return sunsetTimeCh
 }
