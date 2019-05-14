@@ -52,4 +52,4 @@ Note: `config.json` need to be placed in the directory from where `imhome` will 
 ## TODO
 
   - [ ] Staggered Mist API Queries (query less often when the sun is up, more frequently near and after sunset)
-  - [ ] Hysterisis - dont turn on the light if i've already been home and phone reconnects to WiFi
+  - [x] Hysterisis - dont turn on the light if i've already been home and phone reconnects to WiFi
