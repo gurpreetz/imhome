@@ -5,12 +5,12 @@ import (
 	"time"
 )
 
-// FreshConnectUptime - time less than which a device is considered to be a new connection
-const FreshConnectUptime = 180 // seconds
+// freshConnectUptime - time less than which a device is considered to be a new connection
+const freshConnectUptime = 180 // seconds
 
-// DeviceReconnectActionTime - device must be absent for at least this long before any
+// deviceReconnectActionTime - device must be absent for at least this long before any
 // action will be taken
-const DeviceReconnectActionTime = 30 * time.Minute
+const deviceReconnectActionTime = 30 * time.Minute
 
 func main() {
 	cfg, err := cfgParser()
@@ -34,9 +34,9 @@ func main() {
 		case <-devTicker.C:
 			deviceInfo, err := GetDeviceInfo(cfg)
 			if err == nil {
-				if time.Since(deviceLastSeenTime) > DeviceReconnectActionTime {
+				if time.Since(deviceLastSeenTime) > deviceReconnectActionTime {
 					fmt.Printf("%v :: Device last seen at %v \n", time.Now(), deviceLastSeenTime)
-					if deviceInfo.UpTime < FreshConnectUptime {
+					if deviceInfo.UpTime < freshConnectUptime {
 						fmt.Printf("%v :: Device just connected after being away\n", time.Now())
 						currentTime := time.Now()
 						if currentTime.After(solarData.Sunset.Local()) {
@@ -48,7 +48,7 @@ func main() {
 					}
 				}
 				deviceLastSeenTime = time.Now()
-				fmt.Printf("Found Device %s connected for %d seconds\n", deviceInfo.HostName, deviceInfo.UpTime)
+				//fmt.Printf("Found Device %s connected for %d seconds\n", deviceInfo.HostName, deviceInfo.UpTime)
 			}
 		case <-sunTicker.C:
 			solarData, err = GetSolarData(cfg.Coordinates)
