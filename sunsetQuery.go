@@ -55,6 +55,9 @@ func GetSolarData(coordinates Coordinates) (*SunriseSunsetResults, error) {
 	if container.Status != "OK" {
 		return nil, fmt.Errorf("Invalid Sunrise-Sunset Response Status: %s", container.Status)
 	}
+	fmt.Printf("*** Queried at %v *** \n", time.Now())
+	fmt.Printf("Sunset will be in %v\n", time.Until(container.Results.Sunset))
+	fmt.Printf("Sunrise will be in %v\n", time.Until(container.Results.Sunrise))
 
 	return &container.Results, nil
 }
