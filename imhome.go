@@ -20,7 +20,7 @@ func getDeviceStatus(deviceInfo *DeviceInfo, deviceLastSeenTime time.Time, sunse
 			currentTime := time.Now()
 			if currentTime.After(sunsetTime.Local()) {
 				fmt.Printf("%v :: Do something\n", time.Now())
-				return false, deviceLastSeenTime
+				return true, deviceLastSeenTime
 			}
 			fmt.Printf("%v :: Sun is still up; Do nothing\n", time.Now())
 		}
